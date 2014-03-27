@@ -48,20 +48,6 @@
 		<java jar="${dist}/lib/testProject.jar" fork="true"/>	
 </target>
 
-<!-- <target name="test">
-		<java classname="com.test.Project" classpath="${build}" fork="true"/>	
-</target>
--->
-
-<!-- <target name="test">
-		<java classname="com.test.UnitTest" fork="true">	
-			<classpath>
-				<pathelement location="${dist}/lib/testProject.jar"/>
-			</classpath>
-		</java>
-</target>
--->
-
 <path id="junit.class.path">
     <pathelement location="lib/junit-4.11.jar" />
     <pathelement location="${build}" />

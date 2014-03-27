@@ -18,6 +18,7 @@
 		<format property="TODAY_GB" pattern="MM/dd/yyyy hh:mm:ss aa" locale="en,GB"/>
 </tstamp>
 <mkdir dir="${build}"/>
+<mkdir dir="${report}"/>
 <echo message="Timestamp ${TODAY_GB}" />
 </target>
 

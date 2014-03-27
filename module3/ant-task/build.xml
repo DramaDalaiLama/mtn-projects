@@ -7,6 +7,7 @@
 <property name="dist" location="dist"/>
 <property name="lib" value="lib"/>
 <property name="test" value="test"/>
+<property name="report" value="report"/>
 
 <path id="classpath">
 <fileset dir="${lib}" includes="**/*.jar"/>
@@ -21,15 +22,16 @@
 </target>
 
 <target name="compile" depends="init" >
-<javac srcdir="${src}" destdir="${build}">
-<classpath>
-<path refid="classpath"/>
-</classpath>
+	<javac srcdir="${src}" destdir="${build}">
+		<classpath>		
+			<path refid="classpath"/>
+		</classpath>
 	</javac>
+	
 	<javac srcdir="${test}" destdir="${build}">
-<classpath>
-<path refid="classpath"/>
-</classpath>
+		<classpath>
+			<path refid="classpath"/>
+		</classpath>
 	</javac>
 </target>
 
@@ -60,14 +62,25 @@
 </target>
 -->
 
-<target name="test" depends="compile">
-<junit>
-<test name="com.test.UnitTest"/>
-		<classpath>
-				<pathelement location="${lib}"/>
-		</classpath>
-</junit>
-</target>
+<path id="junit.class.path">
+    <pathelement location="lib/junit-4.11.jar" />
+    <pathelement location="${build}" />
+  </path>
+
+  <target name="test">
+	
+    <junit printsummary="on" fork="true" haltonfailure="yes">
+      <classpath>
+		<pathelement location="junit.class.path"/>
+	  </classpath>
+      <formatter type="xml" />
+      <batchtest todir="${report}">
+        <fileset dir="${dist}/lib">
+          <include name="**/*Test*" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
 
 <target name="clean">
 <delete dir="${build}"/>

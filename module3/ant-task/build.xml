@@ -1,0 +1,77 @@
+<!-- Building test project -->
+
+<project name="TestProject" default="dist" basedir=".">
+
+<property name="src" location="src"/>
+<property name="build" location="build"/>
+<property name="dist" location="dist"/>
+<property name="lib" value="lib"/>
+<property name="test" value="test"/>
+
+<path id="classpath">
+<fileset dir="${lib}" includes="**/*.jar"/>
+</path>
+
+<target name="init">
+<tstamp>
+		<format property="TODAY_GB" pattern="MM/dd/yyyy hh:mm:ss aa" locale="en,GB"/>
+</tstamp>
+<mkdir dir="${build}"/>
+<echo message="Timestamp ${TODAY_GB}" />
+</target>
+
+<target name="compile" depends="init" >
+<javac srcdir="${src}" destdir="${build}">
+<classpath>
+<path refid="classpath"/>
+</classpath>
+	</javac>
+	<javac srcdir="${test}" destdir="${build}">
+<classpath>
+<path refid="classpath"/>
+</classpath>
+	</javac>
+</target>
+
+<target name="dist" depends="compile" >
+<mkdir dir="${dist}/lib"/>
+<jar jarfile="${dist}/lib/testProject.jar" basedir="${build}">
+		<manifest>
+			<attribute name="Main-Class" value="com.test.Project"/>
+		</manifest>
+</jar>	
+</target>
+
+<target name="run">
+		<java jar="${dist}/lib/testProject.jar" fork="true"/>	
+</target>
+
+<!-- <target name="test">
+		<java classname="com.test.Project" classpath="${build}" fork="true"/>	
+</target>
+-->
+
+<!-- <target name="test">
+		<java classname="com.test.UnitTest" fork="true">	
+			<classpath>
+				<pathelement location="${dist}/lib/testProject.jar"/>
+			</classpath>
+		</java>
+</target>
+-->
+
+<target name="test" depends="compile">
+<junit>
+<test name="com.test.UnitTest"/>
+		<classpath>
+				<pathelement location="${lib}"/>
+		</classpath>
+</junit>
+</target>
+
+<target name="clean">
+<delete dir="${build}"/>
+<delete dir="${dist}"/>
+</target>
+</project>
+

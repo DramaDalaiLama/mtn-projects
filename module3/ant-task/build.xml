@@ -51,22 +51,21 @@
 <path id="junit.class.path">
     <pathelement location="lib/junit-4.11.jar" />
     <pathelement location="${build}" />
-  </path>
+</path>
 
-  <target name="test">
-	
+ <target name="test" depends="dist">
     <junit printsummary="on" fork="true" haltonfailure="yes">
       <classpath>
 		<pathelement location="junit.class.path"/>
 	  </classpath>
       <formatter type="xml" />
       <batchtest todir="${report}">
-        <fileset dir="${dist}/lib">
-          <include name="**/*Test*" />
-        </fileset>
+		<fileset dir="${dist}/lib">
+         <include name="**/*Test*" />
+		</fileset>
       </batchtest>
     </junit>
-  </target>
+ </target>
 
 <target name="clean">
 <delete dir="${build}"/>

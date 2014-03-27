@@ -28,12 +28,6 @@
 			<path refid="classpath"/>
 		</classpath>
 	</javac>
-	
-	<javac srcdir="${test}" destdir="${build}">
-		<classpath>
-			<path refid="classpath"/>
-		</classpath>
-	</javac>
 </target>
 
 <target name="dist" depends="compile" >
@@ -50,7 +44,7 @@
 </target>
 
 <path id="junit.class.path">
-    <pathelement location="lib/junit-4.11.jar" />
+    <pathelement location="${lib}/junit-4.11.jar" />
     <pathelement location="${build}" />
 </path>
 

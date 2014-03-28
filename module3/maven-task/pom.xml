@@ -21,4 +21,28 @@
 		<version>1.0</version>
 	</dependency>	
   </dependencies>
+  
+      <build>
+    <finalName>${maven.build.timestamp}</finalName>
+     <plugins>
+      <plugin>
+	  <artifactId>maven-assembly-plugin</artifactId>
+	  <version>2.2-beta-5</version>
+	  <configuration>
+	    <descriptors>
+	      <descriptor>assembly.xml</descriptor>
+	    </descriptors>
+            <outputDirectory>${project.build.directory}/dist</outputDirectory>
+	  </configuration>
+	  <executions>
+	    <execution>
+	      <phase>package</phase> 
+	      <goals>
+		<goal>single</goal>
+	      </goals>
+	    </execution>
+	  </executions>
+	</plugin>
+     </plugins>
+    </build>
 </project>

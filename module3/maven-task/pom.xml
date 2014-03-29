@@ -45,4 +45,17 @@
 	</plugin>
      </plugins>
     </build>
+    
+    <distributionManagement>
+  <repository>
+     <id>deployment</id>
+     <name>Internal Releases</name>
+     <url>http://jenkinsvm:9090/nexus/content/repositories/newrel/</url>
+  </repository>
+  <snapshotRepository>
+     <id>deployment</id>
+     <name>Internal Releases</name>
+     <url>http://jenkinsvm:9090/nexus/content/repositories/newsnap/</url>
+  </snapshotRepository>
+</distributionManagement>
 </project>
